@@ -11,17 +11,39 @@ CREATE TABLE IF NOT EXISTS users (
 
 CREATE TABLE IF NOT EXISTS tasks (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     pontos INT NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS tarefas_concluidas (
+CREATE TABLE IF NOT EXISTS task_photos (
     id SERIAL PRIMARY KEY,
-    usuario_id INT REFERENCES users(id),
-    tarefa_id INT REFERENCES tasks(id),
+    task_id INT NOT NULL,
+    photo_url TEXT NOT NULL,
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS compledted_tasks (
+    id SERIAL PRIMARY KEY,
+    user_id INT REFERENCES users(id),
+    task_id INT REFERENCES tasks(id),
     foto_url TEXT,
-    data_conclusao TIMESTAMP DEFAULT NOW()
+    data_conclusao TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS user_points (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL, 
+    task_id INT NOT NULL,
+    pontos INT NOT NULL DEFAULT 0,
+    motivo VARCHAR(255) NOT NULL,
+    data_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE
 );
