@@ -19,7 +19,7 @@ const Dashboard = ({ user }) => {
         const fetchTasks = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.get('http://localhost:3000/tasks', {
+                const response = await axios.get('http://localhost:5000/tasks', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
             } catch (err) {
@@ -35,7 +35,7 @@ const Dashboard = ({ user }) => {
     const addTask = async (newTask) => {
         try {
             const token = localStorage.getItem('token');
-            const response = await axios.post('http://localhost:3000/tasks', newTask, {
+            const response = await axios.post('http://localhost:5000/tasks', newTask, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setTasks([...tasks, response.data]);
@@ -47,7 +47,7 @@ const Dashboard = ({ user }) => {
     const deleteTask = async (taskId) => {
         try {
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:3000/tasks/${taskId}`, {
+            await axios.delete(`http://localhost:5000/tasks/${taskId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setTasks(tasks.filter(task => task.id !== taskId));

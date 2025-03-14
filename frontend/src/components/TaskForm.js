@@ -13,7 +13,7 @@ const TaskForm = () => {
         setError('');
 
         try {
-            await axios.post('http://localhost:3000/tasks', { title, points });
+            await axios.post('http://localhost:5000/tasks', { title, points });
             setTitle('');
             setPoints(0);
             onTaskAdded();

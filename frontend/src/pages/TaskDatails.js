@@ -11,7 +11,7 @@ const TaskDetails = () => {
 
     const fetchTaskDetails = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/tasks/${taskId}`);
+            const response = await axios.get(`http://localhost:5000/api/tasks/${taskId}`);
             setTask(response.data);
             setLoading(false);
         } catch (err) {
@@ -22,7 +22,7 @@ const TaskDetails = () => {
 
     const markTaskAsCompleted = async () => {
         try {
-            await axios.put(`http://localhost:3000/api/tasks/${taskId}/complete`);
+            await axios.put(`http://localhost:5000/api/tasks/${taskId}/complete`);
             fetchTaskDetails();
         } catch (err) {
             setError("Erro ao marcar a tarefa como concluída.");
@@ -31,7 +31,7 @@ const TaskDetails = () => {
 
     const unmarkTaskAsCompleted = async () => {
         try {
-            await axios.put(`http://localhost:3000/api/task/${taskId}/umcomplete`);
+            await axios.put(`http://localhost:5000/api/task/${taskId}/umcomplete`);
             fetchTaskDetails();
         } catch (err) {
             setError("Erro ao desmarcar a tarefa como concluída.");
@@ -40,7 +40,7 @@ const TaskDetails = () => {
 
     const deleteTask = async () => {
         try {
-            await axios.delete(`http://localhost:3000/api/task/${taskId}`);
+            await axios.delete(`http://localhost:5000/api/task/${taskId}`);
             navigate('/dashboard');
         } catch (err) {
             setError("Erro ao excluir a tarefa.");
