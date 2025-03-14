@@ -10,7 +10,7 @@ const Ranking = () => {
 
     const fetchRanking = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/ranking');
+            const response = await axios.get('http://localhost:3000/ranking');
             setRanking(response.data);
         } catch (error) {
             console.log('Erro ao buscar ranking: ', error);

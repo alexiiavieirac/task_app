@@ -10,7 +10,7 @@ const TaskList = () => {
 
     const fetchTasks = async () => {
         try {
-            const response = await axios.get('http://localhost:3001/tasks');
+            const response = await axios.get('http://localhost:3000/tasks');
             setTasks(response.data);
         } catch (error) {
             console.log(error);
@@ -19,7 +19,7 @@ const TaskList = () => {
 
     const completeTask = async (id) => { 
         try {
-            await axios.put(`http://localhost:3001/tasks/${id}`, { completed: true });
+            await axios.put(`http://localhost:3000/tasks/${id}`, { completed: true });
             fetchTasks();
         } catch (error) {
             console.log(error);
@@ -28,7 +28,7 @@ const TaskList = () => {
 
     const deleteTask = async (id) => {
         try {
-            await axios.delete(`http://localhost:3001/tasks/${id}`);
+            await axios.delete(`http://localhost:3000/tasks/${id}`);
             fetchTasks();
         } catch (error) {
             console.log(error);

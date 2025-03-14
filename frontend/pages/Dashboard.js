@@ -47,7 +47,7 @@ const Dashboard = ({ user }) => {
     const deleteTask = async (taskId) => {
         try {
             const token = localStorage.getItem("token");
-            await axios.delete(`http://localhost:5000/tasks/${taskId}`, {
+            await axios.delete(`http://localhost:3000/tasks/${taskId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setTasks(tasks.filter(task => task.id !== taskId));
