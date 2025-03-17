@@ -29,6 +29,10 @@ const Login = ({ setUser }) => {
         }
     };
 
+    const handleRegister = () => {
+        navigate('/register');
+    };
+
     return (
         <div className="flex items-center justify-center h-screen bg-gray-100">
             <div className="bg-white p-6 rounded-lg shadow-md w-96">
@@ -63,6 +67,14 @@ const Login = ({ setUser }) => {
                         {loading ? "Entrando..." : "Entrar"}
                     </button>
                 </form>
+                <div className="mt-4 text-center">
+                    <p className="text-gray-700">Ainda não tem uma conta?</p>
+                    <button
+                        onClick={handleRegister}
+                        className="w-full bg-green-500 text-white p-2 rounded-lg hover:bg-green-600 mt-2">
+                        Registrar
+                    </button>
+                </div>
             </div>
         </div>
     );

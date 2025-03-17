@@ -32,7 +32,7 @@ function App() {
           />
 
           <Route
-            path="/register"
+            path="auth/register"
             element={
                 isAuthenticated() ? (
                     <Navigate to="/dashboard" />

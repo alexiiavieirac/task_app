@@ -1,4 +1,4 @@
-const { query } = require("../../database/db");
+const { query } = require("../database/db");
 
 const User = {
   // Cria um novo usuário

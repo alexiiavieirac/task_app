@@ -15,7 +15,8 @@ const Register = ({ setUser }) => {
     setError("");
 
     try {
-      const response = await axios.post("http://localhost:5000/register", {
+      // Envia os dados para o backend usando axios.post
+      const response = await axios.post("http://localhost:5000/auth/register", {
         email,
         password,
       });
@@ -24,11 +25,12 @@ const Register = ({ setUser }) => {
       localStorage.setItem("token", response.data.token);
 
       // Atualiza o estado do usuário
-      setUser(response.data.user);
+      setUser({ id: response.data.user.id, email: response.data.user.email });
 
       // Redireciona para o dashboard
       navigate("/dashboard");
     } catch (err) {
+      // Exibe uma mensagem de erro caso algo dê errado
       setError(err.response?.data?.message || "Erro ao registrar usuário.");
     } finally {
       setLoading(false);
