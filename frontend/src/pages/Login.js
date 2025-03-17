@@ -16,11 +16,14 @@ const Login = ({ setUser }) => {
 
         try {
             const response = await axios.post('http://localhost:5000/auth/login', { email, password });
+            if (!response.data.token || !response.data.user) {
+                throw new Error("Resposta inválida da API.")
+            }
             localStorage.setItem('token', response.data.token);
             setUser(response.data.user);
             navigate('/dashboard');
         } catch (err) { 
-            setError("Credenciais inválidas");
+            setError(err.response?.data?.message || "Credenciais inválidas");
         } finally {
             setLoading(false);
         }

@@ -1,24 +1,10 @@
 module.exports = {
-    content : [
-        "./components/**/*.{js, jsx}",
-        "./pages/**/*.{js, jsx}",
-        "./App.js",
+    content: [
+      "./src/**/*.{js,jsx,ts,tsx}", // Caminho para todos os arquivos que usam Tailwind
+      "./public/index.html", // Inclui o arquivo HTML principal
     ],
-
     theme: {
-        extend: {
-            colors: {
-                primary: "#4F46E5",
-                secondary: "#10B981",
-                danger: "#EF4444",
-                sucess: "#10B981",
-                warning: "#F59E0B",
-            },
-            fontFamily: {
-                sans: ["Inter", "sans-serif"],
-            },
-        },
+      extend: {},
     },
-
     plugins: [],
-};
+  };

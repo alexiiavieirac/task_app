@@ -17,13 +17,18 @@ const Dashboard = ({ user }) => {
         }    
 
         const fetchTasks = async () => {
+            setLoading(true);
+            setError('');
+
             try {
                 const token = localStorage.getItem('token');
                 const response = await axios.get('http://localhost:5000/tasks', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
+
+                setTasks(response.data);
             } catch (err) {
-                setError('Erro ao carregar tarefas');
+                setError(err.response?.data?.message || 'Erro ao carregar tarefas');
             } finally {
                 setLoading(false);
             }
@@ -38,9 +43,10 @@ const Dashboard = ({ user }) => {
             const response = await axios.post('http://localhost:5000/tasks', newTask, {
                 headers: { Authorization: `Bearer ${token}` },
             });
+
             setTasks([...tasks, response.data]);
         } catch (err) {
-            setError("Erro ao adicionar tarefa");
+            setError(err.response?.data?.message || "Erro ao adicionar tarefa");
         }
     };
 
@@ -50,9 +56,10 @@ const Dashboard = ({ user }) => {
             await axios.delete(`http://localhost:5000/tasks/${taskId}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
-            setTasks(tasks.filter(task => task.id !== taskId));
+
+            setTasks(tasks.filter((task) => task.id !== taskId));
         } catch (err) {
-            setError("Erro ao excluir tarefa");
+            setError(err.response?.data?.message || "Erro ao excluir tarefa");
         }
     };
 
